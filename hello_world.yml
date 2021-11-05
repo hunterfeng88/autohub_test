@@ -1,6 +1,5 @@
 - name: Hello World Sample
   hosts: all
-  collections: vmware.vmware_rest
   tasks:
     - name: Hello Message
       debug:
