@@ -1,9 +1,9 @@
 - name: Hello World Sample
   hosts: all
-  vars:
-    vcenter_host: 192.168.1.100
-    vcenter_username: administrator@vsphere.local
-    vcenter_password: VMware1!
+  #vars:
+   # vcenter_host: 192.168.1.100
+    #vcenter_username: administrator@vsphere.local
+    #vcenter_password: VMware1!
   collections:
     - vmware.vmware_rest
   
@@ -14,10 +14,10 @@
         
     - name: Collect the list of the existing VM
       vmware.vmware_rest.vcenter_vm_info:
-        vcenter_hostname: "{{ vcenter_host }}"
-        vcenter_password: "{{ vcenter_password }}"
-        vcenter_username: "{{ vcenter_username }}"
-        vcenter_validate_certs: false
+     #   vcenter_hostname: "{{ vcenter_host }}"
+      #  vcenter_password: "{{ vcenter_password }}"
+       # vcenter_username: "{{ vcenter_username }}"
+       # vcenter_validate_certs: false
       register: existing_vms
       until: existing_vms is not failed
     
