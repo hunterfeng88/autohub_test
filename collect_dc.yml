@@ -1,7 +1,7 @@
 - name: collect a list of the datacenters
- hosts: all
-   collections:
-     - vmware.vmware_rest
+  hosts: all
+    collections:
+      - vmware.vmware_rest
   vmware.vmware_rest.vcenter_datacenter_info:
   register: my_datacenters
 
