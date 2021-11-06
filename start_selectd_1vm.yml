@@ -9,8 +9,19 @@
       vmware.vmware_rest.vcenter_datacenter_info:
       register: my_datacenters
       
+    - name: Loop up the VM in the inventory
+      register: search_result
+      vmware.vmware_rest.vcenter_vm_info:
+        filter_name: "{{ vmname }}"
+     
+    - name Collect information about a specific VM
+      vmware.vmware_rest.vcenter_vm_info:
+        vm: '{{ search_result.value[0].vm }}'
+      regster: start_vm_info
+    
     - name: Start the VM
-      vcenter_vm_power:
+      vmware.vmware_rest.vcenter_vm_power:
         state: start
-        vm: "{{ vmname }}"
+        vm: "{{ start_vm_info.id }}"
       ignore_errors: yes
+
