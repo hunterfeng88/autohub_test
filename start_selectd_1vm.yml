@@ -14,7 +14,7 @@
       vmware.vmware_rest.vcenter_vm_info:
         filter_name: "{{ vmname }}"
      
-    - name Collect information about a specific VM
+    - name: Collect information about a specific VM
       vmware.vmware_rest.vcenter_vm_info:
         vm: '{{ search_result.value[0].vm }}'
       regster: start_vm_info
