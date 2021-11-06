@@ -5,7 +5,11 @@
     
     
   tasks:
-    - name: Start all the VM
+    - name: datacenter info
+      vmware.vmware_rest.vcenter_datacenter_info:
+      register: my_datacenters
+      
+    - name: Start the VM
       vcenter_vm_power:
         state: start
         vm: "{{ vmname }}"
