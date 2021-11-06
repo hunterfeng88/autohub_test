@@ -1,0 +1,22 @@
+- name: Start all the vm with vcenter
+  hosts: all
+  collections:
+    - vmware.vmware_rest
+    
+    
+  tasks:
+    - name: datacenter info
+      vmware.vmware_rest.vcenter_datacenter_info:
+      register: my_datacenters
+      
+    - name: Collect the list of the existing VM
+      vcenter_vm_info:
+      register: existing_vms
+      until: existing_vms is not failed
+      
+    - name: Start all the VM
+      vcenter_vm_power:
+        state: stop
+        vm: '{{ item.vm }}'
+      with_items: "{{ existing_vms.value }}"
+      ignore_errors: yes
