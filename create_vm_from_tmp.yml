@@ -1,0 +1,19 @@
+- name: Create a vm from template
+  hosts: all
+  collections:
+    - vmware.vmware_rest
+    
+    
+  tasks:
+    - name: Clone the template
+      vmware_guest:
+        hostname: "{{ IPADDR }}"
+        #username: administrator@vsphere.local
+        #password: vmware
+        #validate_certs: False
+        name: "{{ VMNAME }}"
+        template: rhel84_template 
+        datacenter: Datacenter 
+        f#older: /DC1/vm
+        state: poweredon
+        wait_for_ip_address: yes
