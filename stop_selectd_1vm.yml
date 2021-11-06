@@ -1,0 +1,26 @@
+- name: Stop select the vm with vcenter
+  hosts: all
+  collections:
+    - vmware.vmware_rest
+    
+    
+  tasks:
+    - name: datacenter info
+      vmware.vmware_rest.vcenter_datacenter_info:
+      register: my_datacenters
+      
+    - name: Loop up the VM in the inventory
+      register: search_result
+      vmware.vmware_rest.vcenter_vm_info:
+        filter_names: "{{ vmname }}"
+     
+    - name: Collect information about a specific VM
+      vmware.vmware_rest.vcenter_vm_info:
+        vm: '{{ search_result.value[0].vm }}'
+      register: start_vm_info
+    
+    - name: Stop the VM
+      vmware.vmware_rest.vcenter_vm_power:
+        state: stop
+        vm: "{{ start_vm_info.id }}"
+      ignore_errors: yes
