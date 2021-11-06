@@ -8,5 +8,5 @@
     - name: Start all the VM
       vcenter_vm_power:
         state: start
-        vm: {{ vmname }}
+        vm: "{{ vmname }}"
       ignore_errors: yes
