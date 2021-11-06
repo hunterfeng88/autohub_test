@@ -1,0 +1,12 @@
+- name: Start select the vm with vcenter
+  hosts: all
+  collections:
+    - vmware.vmware_rest
+    
+    
+  tasks:
+    - name: Start all the VM
+      vcenter_vm_power:
+        state: start
+        vm: {{ vmname }}
+      ignore_errors: yes
